@@ -1,7 +1,3 @@
-Here is the updated README file:
-
-**Current README.md:**
-----------------------
 LinkedIn Post Generator
 ===========================
 
