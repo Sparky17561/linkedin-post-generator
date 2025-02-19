@@ -1,4 +1,5 @@
 import asyncio
+import os
 import json
 from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
@@ -10,7 +11,7 @@ GROQ_API_KEY = "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"  # Rep
 # Initialize LLM Model (Groq Llama 3.1 70B)
 llm = ChatGroq(model="llama3-70b-8192", api_key=GROQ_API_KEY)
 
-# Prompt Template for README.md generation
+# Prompt Template for generating README.md
 readme_prompt_template = PromptTemplate(
     input_variables=["project_description"],
     template="""
@@ -38,40 +39,103 @@ readme_prompt_template = PromptTemplate(
     """
 )
 
-async def generate_readme(project_description):
-    """Generate a README.md file using Groq Llama 3.1 based on user input."""
+# Prompt Template for editing README.md
+edit_prompt_template = PromptTemplate(
+    input_variables=["existing_readme", "changes"],
+    template="""
+    You are an AI that **modifies** README.md files based on user feedback.
+
+    Given the following existing README file:
+
+    **Current README.md:**
+    ----------------------
+    {existing_readme}
+
+    The user wants the following changes:
+    --------------------------------------
+    {changes}
+
+    Please update the README file **while preserving the original structure** and apply the necessary changes.
+
+    Ensure the updated README remains **well-structured** and **properly formatted**.
+
+    Output:
+    """
+)
+
+async def generate_readme():
+    """Generate a README.md file from scratch."""
+    project_description = input("\nDescribe your project (features, tech stack, purpose, etc.):\n\n")
     
-    # Format the prompt
+    print("\n🚀 Generating README.md...\n")
     formatted_prompt = readme_prompt_template.format(project_description=project_description)
-    
-    # Send the request to Llama 3.1
+
     messages = [
         SystemMessage(content="You are a professional README.md generator."),
         HumanMessage(content=formatted_prompt)
     ]
 
     response = llm.invoke(messages)
-    
-    # Extract and save the README.md content
     readme_content = response.content
 
     with open("README.md", "w", encoding="utf-8") as file:
         file.write(readme_content)
 
-    return readme_content
-
-async def main():
-    """Main function to take user input and generate README.md."""
-    print("\n📝 Welcome to the README.md Generator!\n")
-    project_description = input("Describe your project (features, tech stack, purpose, etc.):\n\n")
-    
-    print("\n🚀 Generating README.md...\n")
-    readme_content = await generate_readme(project_description)
-    
-    print("\n✅ README.md generated successfully!\n")
+    print("\n✅ README.md has been created successfully!\n")
     print("📄 Preview:\n")
     print(readme_content)
-    print("\n💾 The file has been saved as README.md in your current directory.")
+
+async def edit_readme():
+    """Edit an existing README.md file based on user input."""
+    if not os.path.exists("README.md"):
+        print("\n⚠️ No README.md file found in the current directory. Generate one first!\n")
+        return
+
+    with open("README.md", "r", encoding="utf-8") as file:
+        existing_readme = file.read()
+
+    print("\n📄 Current README.md content:\n")
+    print(existing_readme)
+    
+    changes = input("\nWhat changes would you like to make to the README?\n\n")
+
+    print("\n✍️ Applying changes...\n")
+    formatted_prompt = edit_prompt_template.format(existing_readme=existing_readme, changes=changes)
+
+    messages = [
+        SystemMessage(content="You are an AI that edits README.md files professionally."),
+        HumanMessage(content=formatted_prompt)
+    ]
+
+    response = llm.invoke(messages)
+    updated_readme = response.content
+
+    with open("README.md", "w", encoding="utf-8") as file:
+        file.write(updated_readme)
+
+    print("\n✅ README.md has been updated successfully!\n")
+    print("📄 Updated Preview:\n")
+    print(updated_readme)
+
+async def main():
+    """Main function to provide user options."""
+    while True:
+        print("\n📝 README.md Generator & Editor")
+        print("1️⃣ Generate a new README.md")
+        print("2️⃣ Edit an existing README.md")
+        print("3️⃣ Exit")
+        
+        choice = input("\nChoose an option (1, 2, or 3): ")
+
+        if choice == "1":
+            await generate_readme()
+        elif choice == "2":
+            await edit_readme()
+        elif choice == "3":
+            print("\n👋 Exiting... Goodbye!\n")
+            break
+        else:
+            print("\n❌ Invalid choice. Please enter 1, 2, or 3.")
 
 if __name__ == "__main__":
     asyncio.run(main())
