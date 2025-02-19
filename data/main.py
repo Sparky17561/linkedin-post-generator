@@ -84,6 +84,7 @@ async def fetch_readme(url):
     """Scrape README.md content from GitHub."""
     async with AsyncWebCrawler() as crawler:
         result = await crawler.arun(url)
+        print(result.markdown)
         return result.markdown  # Extract the Markdown content
 
 async def process_readme_with_groq(readme_text):
