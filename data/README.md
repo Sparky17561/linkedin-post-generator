@@ -42,14 +42,12 @@ You will be prompted to provide additional information to enhance the LinkedIn p
 ### Step 3: Post to LinkedIn
 You will be asked to provide your LinkedIn developer API credentials. The tool will use these credentials to log in to LinkedIn and post the generated content.
 
-**Key Features:**
-* Generate LinkedIn posts from user input or GitHub README.md files
-* Utilizes LinkedIn API to post content directly to the user's profile
-* Customizable post content using prompts
-* Supports GitHub repository scraping for data extraction using Crawl4AI
-* Utilizes LinkedIn API to post content, which allows for seamless integration with the user's LinkedIn profile
-* Web scraping using Crawl4AI enables the extraction of relevant data from GitHub README.md files
-* Tech stack includes React, PostgreSQL, Django, and Groq Cloud, ensuring a robust and scalable solution
+**Features:**
+* **README Generator**: Generates a LinkedIn post based on a GitHub README.md file
+* **LinkedIn Automation**: Posts the generated content directly to the user's LinkedIn profile using the LinkedIn API
+* **Customizable Post Content**: Allows users to provide additional information to enhance the LinkedIn post
+* **GitHub Repository Scraping**: Uses Crawl4AI to extract relevant data from GitHub README.md files
+* **Tech Stack Integration**: Utilizes a robust tech stack including React, PostgreSQL, Django, and Groq Cloud
 
 **Tech Stack:**
 
