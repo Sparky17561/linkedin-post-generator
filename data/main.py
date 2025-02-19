@@ -153,5 +153,10 @@ async def main():
         print("\n💼 Generated LinkedIn Post:\n")
         print(processed_data["linkedin_post"])
 
+        # Save the generated LinkedIn post to a file named post.txt
+        with open("post.txt", "w", encoding="utf-8") as file:
+            file.write(processed_data["linkedin_post"])
+        print("\n✅ The LinkedIn post has been saved to post.txt")
+
 if __name__ == "__main__":
     asyncio.run(main())
