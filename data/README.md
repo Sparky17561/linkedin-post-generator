@@ -12,7 +12,7 @@ The LinkedIn Post Generator is a innovative tool that enables users to generate 
 ### Step 1: Clone the Repository
 Clone the repository using the following command:
 ```bash
-git clone https://github.com/[Your-Username]/LinkedIn-Post-Generator.git
+git clone https://github.com/Sparky17561/LinkedIn-Post-Generator.git
 ```
 ### Step 2: Install Dependencies
 Navigate to the project directory and install the required dependencies using pip:
@@ -72,5 +72,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 **Contact:**
 If you have any questions or need assistance, feel free to reach out to me:
 
-* GitHub: [Your-GitHub-Username](https://github.com/[Your-GitHub-Username])
-* Email: [your-email@example.com](mailto:your-email@example.com)
+* GitHub: [https://github.com/Sparky17561](https://github.com/Sparky17561)
+* Email: [studentjamdar@gmail.com](mailto:studentjamdar@gmail.com)
