@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'post_generator'
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+# Get API keys
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+
+# # Debugging: Check if variables are loaded correctly
+# print(f"GROQ_API_KEY: {GROQ_API_KEY}")
+# print(f"ACCESS_TOKEN: {ACCESS_TOKEN}")
